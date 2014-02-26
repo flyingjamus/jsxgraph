@@ -1119,6 +1119,7 @@ define([
             }
 
             this.numTraces = 0;
+            this.traces = {};
             return this;
         },
 

@@ -1041,6 +1041,9 @@ define([
                     visProp: Type.deepCopy(this.visProp, this.visProp.traceattributes, true)
                 };
 
+          for (var i=0 ; i<this.points.length; i++) {
+            copy.points[i] = {scrCoords: this.points[i].scrCoords.slice(0)}
+          }
             copy.visProp.layer = this.board.options.layer.trace;
             copy.visProp.curvetype = this.visProp.curvetype;
             this.numTraces++;
@@ -1051,7 +1054,7 @@ define([
             this.board.renderer.enhancedRendering = true;
             this.board.renderer.drawCurve(copy);
             this.board.renderer.enhancedRendering = er;
-            this.traces[copy.id] = copy.rendNode;
+            this.traces[copy.id] = copy.rendNode || copy;
 
             return this;
         },

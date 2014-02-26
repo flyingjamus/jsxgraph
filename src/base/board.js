@@ -3251,6 +3251,7 @@ define([
          */
         updateRendererCanvas: function () {
             var el, pEl, i, mini, la,
+                first = true,
                 olen = this.objectsList.length,
                 layers = this.options.layer,
                 len = this.options.layer.numlayers,
@@ -3271,11 +3272,27 @@ define([
 
                 for (el = 0; el < olen; el++) {
                     pEl = this.objectsList[el];
-
+                    if (first) {
+                      if (pEl.elType == 'curve' && pEl.visProp.visible) {
+                        for (var t in pEl.traces) {
+                          if (pEl.traces[t].visProp != undefined) {
+                            this.renderer.updateCurve(pEl.traces[t]);
+                          }
+                        }
+                      }
+                      else if (pEl.elType == 'point' && pEl.visProp.visible) {
+                        for (var t in pEl.traces) {
+                          if (pEl.traces[t].visProp != undefined) {
+                            this.renderer.updatePoint(pEl.traces[t]);
+                          }
+                        }
+                      }
+                    }
                     if (pEl.visProp.layer === mini) {
                         pEl.prepareUpdate().updateRenderer();
                     }
                 }
+                first = false;
             }
             return this;
         },

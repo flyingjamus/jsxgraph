@@ -1611,7 +1611,7 @@ define([
             copy.id = this.id + 'T' + this.numTraces;
             this.numTraces += 1;
 
-            copy.coords = this.coords;
+            copy.coords = {scrCoords: this.coords.scrCoords.splice(0)};
             copy.visProp = Type.deepCopy(this.visProp, this.visProp.traceattributes, true);
             copy.visProp.layer = this.board.options.layer.trace;
             copy.elementClass = Const.OBJECT_CLASS_POINT;
@@ -1619,7 +1619,7 @@ define([
             Type.clearVisPropOld(copy);
 
             this.board.renderer.drawPoint(copy);
-            this.traces[copy.id] = copy.rendNode;
+            this.traces[copy.id] = copy;
 
             return this;
         },
