@@ -2391,6 +2391,12 @@ define([
                 }
 
                 this.renderer.show(this.infobox);
+                if (this.renderer.type === 'canvas' && needsDehighlight) {
+                  this.prepareUpdate();
+                  this.renderer.suspendRedraw(this);
+                  this.updateRenderer();
+                  this.renderer.unsuspendRedraw();
+                }
             }
             return this;
         },
