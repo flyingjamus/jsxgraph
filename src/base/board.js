@@ -2391,7 +2391,7 @@ define([
                 }
 
                 this.renderer.show(this.infobox);
-                if (this.renderer.type === 'canvas' && needsDehighlight) {
+                if (this.renderer.type === 'canvas' && el.needsDehighlight) {
                   this.prepareUpdate();
                   this.renderer.suspendRedraw(this);
                   this.updateRenderer();
@@ -3292,6 +3292,7 @@ define([
                             this.renderer.updatePoint(pEl.traces[t]);
                           }
                         }
+                        this.renderer.updatePoint(pEl);
                       }
                     }
                     if (pEl.visProp.layer === mini) {

@@ -296,16 +296,17 @@ define([
         drawPoint: function (el) {
             var f = el.visProp.face,
                 size = el.visProp.size,
-                scr = el.coords.scrCoords,
+                scr,
                 sqrt32 = size * Math.sqrt(3) * 0.5,
                 s05 = size * 0.5,
                 stroke05 = parseFloat(el.visProp.strokewidth) / 2.0,
                 context = this.context;
 
-            if (!el.visProp.visible) {
+            if (!el.visProp.visible || !el.coords) {
                 return;
             }
 
+            scr = el.coords.scrCoords
             switch (f) {
             case 'cross':  // x
             case 'x':
